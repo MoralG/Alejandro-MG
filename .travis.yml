@@ -30,7 +30,7 @@ deploy:
   local_dir: _site
   github_token: $GITHUB_TOKEN
   on:
-    repo: MoralG/alejandro-mg.github.io
+    repo: MoralG/Alejandro-MG
     on:
-      branch: master
+      branch: gh-pages
   fqdn: www.alejandro-mg.com
