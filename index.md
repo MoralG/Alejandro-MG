@@ -6,8 +6,8 @@ feature_text: |
   "No temo a los ordenadores; lo que temo es quedarme sin ellos"
 ---
 
-* ¿Quieres conocerme o ponerte en contacto conmigo? Consulta la página [Sobre mí](/elements/)
-* Si quieres saber mas sobre mis trabajos y proyectos, consulta mi [Blog](/blog/).
+* **¿Quieres conocerme o ponerte en contacto conmigo?** Consulta la página [Sobre mí](/elements/)
+* **Si quieres saber mas sobre mis trabajos y proyectos**, consulta mi [Blog](/blog/).
 
 ![ICONO](/assets/logos/Avatar.png)
 
