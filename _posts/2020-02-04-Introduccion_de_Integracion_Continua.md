@@ -333,25 +333,18 @@ Por ejemplo, en el fichero `test.py` nos indica en diferentes reglas, que debe d
 self.assertContains(response, "No polls are available.")
 ~~~
 
-Si cambiamos ese respuesta en el fichero `index.html` deberá de fallar el test
+Si cambiamos ese respuesta en el fichero `polls/templates/polls/index.html` deberá de fallar el test
 
 ###### Modificamos el fichero `index.html`
 ~~~
-nano polls/templates/polls/index.html
+.
+.
+.
+    <p>ESTO_ES_UNA_PRUEBA_PARA_REALIZAR_EL_TEST</p>
+.
+.
+.
 
-  {% load static %}
-
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
-
-  {% if latest_question_list %}
-      <ul>
-      {% for question in latest_question_list %}
-          <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }  }</a></li>
-      {% endfor %}
-      </ul>
-  {% else %}
-      <p>ESTO ES UNA PRUEBA PARA REALIZAR EL TEST</p>
-  {% endif %}
 ~~~
 
 ###### Ejecutamos el test
