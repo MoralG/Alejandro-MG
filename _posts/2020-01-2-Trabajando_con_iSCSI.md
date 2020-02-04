@@ -5,11 +5,16 @@ categories:
 excerpt: |
   Vamos a configurar un sistema que exporte algunos targets por iSCSI y los conecte a diversos clientes.
 feature_text: |
-feature_image: ""
-image: "https://picsum.photos/2560/600?image=733"
+  ## Trabajando con iSCSI
+  Vamos a configurar un sistema que exporte algunos targets por iSCSI y los conecte a diversos clientes.
+aside: true
+layout: blog
+collectionpage: posts
 ---
 
 ![iSCSI](https://github.com/MoralG/Trabajando_con_iSCSI/raw/master/image/iSCSI.jpg)
+
+#### Vamos a configurar un sistema que exporte algunos targets por iSCSI y los conecte a diversos clientes, explicando con detalle la forma de trabajar.
 
 #### Vamos a configurar un sistema que exporte algunos targets por iSCSI y los conecte a diversos clientes, explicando con detalle la forma de trabajar.
 
