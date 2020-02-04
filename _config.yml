@@ -68,7 +68,8 @@ collections:
     output: true
     description: "" # The post list page content
     feature_text: |
-      # Post
+      # Bienvenido a mi Blog
+      "No temo a los ordenadores; lo que temo es quedarme sin ellos"
     feature_image: "https://initiate.alphacoders.com/images/180/stretched-1920-1080-180978.png?8870"
 
 # 6. Jekyll collections settings
