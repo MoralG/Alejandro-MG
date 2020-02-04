@@ -626,54 +626,54 @@ Target 2: iqn.2020-01.com:tg2
 Ahora vamos a iniciar el segundo target creado en una máquina Window, para realizar esto vamos abrir el **Iniciador iSCSI**.
 
 ###### Abrimos el Iniciador iSCSI
-![Tarea1.1](image/Tarea1.1_iSCSI.png)
+![Tarea1.1](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.1_iSCSI.png?raw=true)
 
 En la pestaña **Detección** vamos a seleccionar en **Detectar portal..** e indicamos la dirección de nuestro servidor y el puerto. 
 
-![Tarea1.2](image/Tarea1.2_iSCSI.png)
+![Tarea1.2](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.2_iSCSI.png?raw=true)
 
 ###### Detectamos el Servidor
-![Tarea1.3](image/Tarea1.3_iSCSI.png)
+![Tarea1.3](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.3_iSCSI.png?raw=true)
 
 
 Si no ha salido ningun mensaje, es que ha dectectado el Servidor y si vamos a la pestaña **Destino** nos saldrá los target disponibles.
 
 ###### Vemos los target disponibles 
-![Tarea1.4](image/Tarea1.4_iSCSI.png)
+![Tarea1.4](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.4_iSCSI.png?raw=true)
 
 Nos sale que el target `iqn.2020-01.com:tg2` esta incativo, para activarlo tenemos que darle a **Conectar**.
 
 Nos saltará una ventana donde antes de darle a **Aceptar** vamos a Activar el inicio de sesión CHAP dandole a **Opciones Avanzadas...**.
 
 ###### Seleccionamos opciones avazadas
-![Tarea1.5](image/Tarea1.5_iSCSI.png)
+![Tarea1.5](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.5_iSCSI.png?raw=true)
 
 Activamos el inicio de sesion CHAP y ponemos el usuario y contraseña, los mismo que asignamos en la creación del target.
 
 ###### Habilitamos el inicio de CHAP y introducciomos el usuario y contraseña
-![Tarea1.6](image/Tarea1.6_iSCSI.png)
+![Tarea1.6](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.6_iSCSI.png?raw=true)
 
 Ahora al darle a **Aceptar** nos saldrá en estado **Conectado**.
 
 ###### Comprobamos que esta conectado
-![Tarea1.7](image/Tarea1.7_iSCSI.png)
+![Tarea1.7](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.7_iSCSI.png?raw=true)
 
 Ahora ya tenemos los discos asignado y disponibles para inicializarlos y formatearlos a NTFS. Para hacer esto vamos a abrir **Administración de discos**
 
 ###### Abrimos el administración de discos
-![Tarea1.8](image/Tarea1.8_iSCSI.png)
+![Tarea1.8](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.8_iSCSI.png?raw=true)
 
 ###### Inicializamos los discos
-![Tarea1.9](image/Tarea1.9_iSCSI.png)
+![Tarea1.9](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.9_iSCSI.png?raw=true)
 
 ###### Formateamos los discos a NTFS
-![Tarea1.10](image/Tarea10_iSCSI.png)
-![Tarea1.11](image/Tarea1.11_iSCSI.png)
+![Tarea1.10](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea10_iSCSI.png?raw=true)
+![Tarea1.11](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.11_iSCSI.png?raw=true)
 
 Comprobamos que nos salen montados y podemos utilizarlos de manera normal.
 
 ###### Comprobamos que aparecen montados
-![Tarea1.12](image/Tarea1.12_iSCSI.png)
+![Tarea1.12](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.12_iSCSI.png?raw=true)
 
 ###### Creamos un fichero
-![Tarea1.13](image/Tarea1.13_iSCSI.png)
+![Tarea1.13](https://github.com/MoralG/Trabajando_con_iSCSI/blob/master/image/Tarea1.13_iSCSI.png?raw=true)
