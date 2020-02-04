@@ -1,4 +1,3 @@
-# Introducción a la integración continua
 ---
 title: "Introducción a la integración continua"
 categories:
@@ -429,7 +428,6 @@ Tenemos listo el escenario para realizar el mismo cambio que hicimos en el [punt
 ![Travis](https://github.com/MoralG/Introduccion_de_Integracion_Continua/blob/master/image/Travis2.5.png?raw=true)
 
 ------------------------------------
-
 
 ###### Cambio realizado con el error
 ------------------------------------
