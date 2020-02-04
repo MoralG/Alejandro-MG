@@ -4,17 +4,12 @@ categories:
 - Sistemas
 excerpt: |
   Vamos a configurar un sistema que exporte algunos targets por iSCSI y los conecte a diversos clientes.
-feature_text: |
-  ## Trabajando con iSCSI
-  #### Vamos a configurar un sistema que exporte algunos targets por iSCSI y los conecte a diversos clientes.
 aside: true
 ---
 
 ![iSCSI](https://github.com/MoralG/Trabajando_con_iSCSI/raw/master/image/iSCSI.jpg)
 
-#### Vamos a configurar un sistema que exporte algunos targets por iSCSI y los conecte a diversos clientes, explicando con detalle la forma de trabajar.
-
-#### Vamos a configurar un sistema que exporte algunos targets por iSCSI y los conecte a diversos clientes, explicando con detalle la forma de trabajar.
+**Vamos a configurar un sistema que exporte algunos targets por iSCSI y los conecte a diversos clientes, explicando con detalle la forma de trabajar.**
 
 Vamos a crear un escenario con Vagrant. Vamos a crear una máquina servidor, conectada por una red interna a dos cliente, un cliente Debian y otro Window. al servidor le añadiremos 3 volúmenes. Añadiremos un interfaz con conexión a internet para poder descargar los paquetes necesarios.
 
