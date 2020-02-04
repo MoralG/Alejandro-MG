@@ -4,6 +4,7 @@ feature_image: "https://initiate.alphacoders.com/images/180/stretched-1920-1080-
 feature_text: |
   ## Bienvenido al Blog de Alejandro Morales
   "No temo a los ordenadores; lo que temo es quedarme sin ellos"
+aside: true
 ---
 
 * **¿Quieres conocerme o ponerte en contacto conmigo?** Consulta la página [Sobre mí](/elements/)
