@@ -1,5 +1,5 @@
 ---
-title: "Trabajando con iSCSI"
+title: "Cortafuego Perimetral con DMZ"
 categories:
 - Seguridad
 excerpt: |
@@ -13,7 +13,7 @@ aside: true
 
 ## Esquema de red
 ------------------------------------------------------------------------------------------------
-#### Vamos a utilizar tres máquinas en openstack, que vamos a crear con la receta heat: escenario3.yaml. La receta heat ha deshabilitado el cortafuego que nos ofrece openstack (todos los puertos de todos los protocolos están abiertos). Una máquina (que tiene asignada una IP flotante) hará de cortafuegos, otra será una máquina de la red interna 192.168.100.0/24 y la tercera será un servidor en la DMZ donde iremos instalando distintos servicios y estará en la red 192.168.200.0/24.
+Vamos a utilizar tres máquinas en openstack, que vamos a crear con la receta heat: escenario3.yaml. La receta heat ha deshabilitado el cortafuego que nos ofrece openstack (todos los puertos de todos los protocolos están abiertos). Una máquina (que tiene asignada una IP flotante) hará de cortafuegos, otra será una máquina de la red interna 192.168.100.0/24 y la tercera será un servidor en la DMZ donde iremos instalando distintos servicios y estará en la red 192.168.200.0/24.
 
 ![Tarea1.1](https://github.com/MoralG/Cortafuego_Perimetral_con_DMZ/blob/master/image/Tarea1.1_DMZ.png?raw=true)
 
@@ -22,7 +22,7 @@ aside: true
 
 * #### Política por defecto DROP para las cadenas INPUT, FORWARD y OUTPUT.
 
-###### Limpiamos las tablas.
+Limpiamos las tablas.
 
 ~~~
 sudo iptables -F
@@ -31,7 +31,7 @@ sudo iptables -Z
 sudo iptables -t nat -Z
 ~~~
 
-###### Conexión ssh antes de estableces la politica por defecto en Drop para no perder la coonexión.
+Conexión ssh antes de estableces la politica por defecto en Drop para no perder la coonexión.
 
 ~~~
 sudo iptables -A INPUT -s 172.22.0.0/16 -p tcp -m tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
@@ -47,7 +47,7 @@ sudo iptables -A OUTPUT -p tcp -o eth2 -d 192.168.200.0/24 --dport 22 -m state -
 sudo iptables -A INPUT -p tcp -i eth2 -s 192.168.200.0/24 --sport 22 -m state --state ESTABLISHED -j ACCEPT
 ~~~
 
-###### Establecemos la política.
+Establecemos la política.
 
 ~~~
 sudo iptables -P INPUT DROP
@@ -66,21 +66,21 @@ sudo iptables -P FORWARD DROP
 
 ##### Reglas
 
-###### Hay que activar el 'ip_forward'
+Hay que activar el 'ip_forward'
 ~~~
 sudo su
 echo 1 > /proc/sys/net/ipv4/ip_forward
 exit
 ~~~
 
-###### Configuramos la redirecion del puerto 2222 al 22
+Configuramos la redirecion del puerto 2222 al 22
 ~~~
 sudo iptables -t nat -I PREROUTING -p tcp -s 172.22.0.0/16 --dport 2222 -j REDIRECT --to-ports 22
 
 sudo iptables -t nat -I PREROUTING -p tcp -s 172.23.0.0/16 --dport 2222 -j REDIRECT --to-ports 22
 ~~~
 
-###### Configuramos la regla para que se pueda hacer conexión desde el puerto 2222
+Configuramos la regla para que se pueda hacer conexión desde el puerto 2222
 ~~~
 sudo iptables -A INPUT -s 172.22.0.0/16 -p tcp -m tcp --dport 2222 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A OUTPUT -d 172.22.0.0/16 -p tcp -m tcp --sport 2222 -m state --state ESTABLISHED -j ACCEPT
@@ -89,7 +89,7 @@ sudo iptables -A INPUT -s 172.23.0.0/16 -p tcp -m tcp --dport 2222 -m state --st
 sudo iptables -A OUTPUT -d 172.23.0.0/16 -p tcp -m tcp --sport 2222 -m state --state ESTABLISHED -j ACCEPT
 ~~~
 
-###### Bloquemos la conexión desde el puerto 22 redirigiendola al Loopback para que se pierda
+Bloquemos la conexión desde el puerto 22 redirigiendola al Loopback para que se pierda
 ~~~
 sudo iptables -t nat -I PREROUTING -p tcp -s 172.22.0.0/16 --dport 22 --jump DNAT --to-destination 127.0.0.1
 
@@ -140,13 +140,13 @@ moralg@padano:~$ ssh -A -p 22 debian@172.22.200.145
 
 ##### Reglas
 
-###### LAN
+LAN
 ~~~
 sudo iptables -A INPUT -s 192.168.100.10/24 -p tcp -m tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A OUTPUT -d 192.168.100.10/24 -p tcp -m tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
 ~~~
 
-###### DMZ
+DMZ
 ~~~
 sudo iptables -A INPUT -s 192.168.200.10/16 -p tcp -m tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A OUTPUT -d 192.168.200.10/16 -p tcp -m tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
@@ -154,7 +154,7 @@ sudo iptables -A OUTPUT -d 192.168.200.10/16 -p tcp -m tcp --sport 22 -m state -
 
 ##### Comprobación
 
-###### LAN
+LAN
 ~~~
 debian@router-fw:~$ ssh -A debian@192.168.100.10
     Linux lan 4.19.0-6-cloud-amd64 #1 SMP Debian 4.19.67-2+deb10u1 (2019-09-20) x86_64
@@ -185,7 +185,7 @@ debian@lan:~$ ssh debian@192.168.100.2
 debian@router-fw:~$ exit
 ~~~
 
-###### DMZ
+DMZ
 ~~~
 debian@router-fw:~$ ssh -A debian@192.168.200.10
     Linux dmz 4.19.0-6-cloud-amd64 #1 SMP Debian 4.19.67-2+deb10u1 (2019-09-20) x86_64
@@ -256,21 +256,21 @@ debian@router-fw:~$ ping 127.0.0.1
 
 ##### Reglas
 
-###### LAN
+LAN
 ~~~
 sudo iptables -A INPUT -i eth1 -s 192.168.100.0/24 -p icmp -m icmp --icmp-type echo-request -j REJECT --reject-with icmp-port-unreachable
 sudo iptables -A OUTPUT -o eth1 -d 192.168.100.0/24 -p icmp -m icmp --icmp-type echo-reply -j ACCEPT
 sudo iptables -A OUTPUT -o eth1 -d 192.168.100.0/24 -p icmp -m state --state RELATED -j ACCEPT
 ~~~
 
-###### DMZ
+DMZ
 ~~~
 sudo iptables -A INPUT -i eth2 -s 192.168.200.0/24 -p icmp -m icmp --icmp-type echo-request -j ACCEPT
 sudo iptables -A OUTPUT -o eth2 -d 192.168.200.0/24 -p icmp -m icmp --icmp-type echo-reply -j ACCEPT
 ~~~
 
 ##### Comprobación
-###### LAN
+LAN
 ~~~
 debian@lan:~$ ping 192.168.100.2
     PING 192.168.100.2 (192.168.100.2) 56(84) bytes of data.
@@ -284,7 +284,7 @@ debian@lan:~$ ping 192.168.100.2
     5 packets transmitted, 0 received, +5 errors, 100% packet loss, time 16ms
 ~~~
 
-###### DMZ
+DMZ
 ~~~
 debian@dmz:~$ ping 192.168.200.2
     PING 192.168.200.2 (192.168.200.2) 56(84) bytes of data.
@@ -303,19 +303,19 @@ debian@dmz:~$ ping 192.168.200.2
 
 ##### Reglas
 
-###### LAN
+LAN
 ~~~
 sudo iptables -A OUTPUT -o eth1 -d 192.168.100.0/24 -p icmp -m icmp --icmp-type echo-request -j ACCEPT
 sudo iptables -A INPUT -i eth1 -s 192.168.100.0/24 -p icmp -m icmp --icmp-type echo-reply -j ACCEPT
 ~~~
 
-###### DMZ
+DMZ
 ~~~
 sudo iptables -A OUTPUT -o eth2 -d 192.168.200.0/24 -p icmp -m icmp --icmp-type echo-request -j ACCEPT
 sudo iptables -A INPUT -i eth2 -s 192.168.200.0/24 -p icmp -m icmp --icmp-type echo-reply -j ACCEPT
 ~~~
 
-###### Exterior
+Exterior
 ~~~
 sudo iptables -A OUTPUT -o eth0 -p icmp -m icmp --icmp-type echo-request -j ACCEPT
 sudo iptables -A INPUT -i eth0 -p icmp -m icmp --icmp-type echo-reply -j ACCEPT
@@ -323,7 +323,7 @@ sudo iptables -A INPUT -i eth0 -p icmp -m icmp --icmp-type echo-reply -j ACCEPT
 
 ##### Comprobación
 
-###### LAN
+LAN
 ~~~
 debian@router-fw:~$ ping 192.168.100.10
     PING 192.168.100.10 (192.168.100.10) 56(84) bytes of data.
@@ -338,7 +338,7 @@ debian@router-fw:~$ ping 192.168.100.10
     rtt min/avg/max/mdev = 0.696/0.832/1.015/0.106 ms
 ~~~
 
-###### DMZ
+DMZ
 ~~~
 debian@router-fw:~$ ping 192.168.200.10
     PING 192.168.200.10 (192.168.200.10) 56(84) bytes of data.
@@ -353,7 +353,7 @@ debian@router-fw:~$ ping 192.168.200.10
     rtt min/avg/max/mdev = 0.790/1.154/1.801/0.344 ms
 ~~~
 
-###### Exterior
+Exterior
 ~~~
 debian@router-fw:~$ ping 1.1.1.1
     PING 1.1.1.1 (1.1.1.1) 56(84) bytes of data.
@@ -372,20 +372,20 @@ debian@router-fw:~$ ping 1.1.1.1
 
 ##### Reglas
 
-###### SSH
+SSH
 ~~~
 sudo iptables -A FORWARD -i eth2 -o eth1 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i eth1 -o eth2 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
 ~~~
 
-###### PING
+PING
 ~~~
 sudo iptables -A FORWARD -i eth2 -o eth1 -s 192.168.200.0/24 -p icmp -m icmp --icmp-type echo-request -j ACCEPT
 sudo iptables -A FORWARD -i eth1 -o eth2 -d 192.168.200.0/24 -p icmp -m icmp --icmp-type echo-reply -j ACCEPT
 ~~~
 
 ##### Comprobación
-###### SSH
+SSH
 ~~~
 debian@dmz:~$ ssh 192.168.100.10
     The authenticity of host '192.168.100.10 (192.168.100.10)' can't be established.
@@ -405,7 +405,7 @@ debian@dmz:~$ ssh 192.168.100.10
 debian@lan:~$ exit
 ~~~
 
-###### PING
+PING
 ~~~
 debian@dmz:~$ ping 192.168.100.10
     PING 192.168.100.10 (192.168.100.10) 56(84) bytes of data.
@@ -423,18 +423,18 @@ debian@dmz:~$ ping 192.168.100.10
 ### Tarea 7. Desde la máquina LAN no se puede hacer ping, pero si se puede conectar por ssh a la máquina DMZ.
 
 ##### Reglas
-###### SSH
+SSH
 ~~~
 sudo iptables -A FORWARD -i eth1 -o eth2 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i eth2 -o eth1 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
 ~~~
 
-###### PING
+PING
 > Por defecto esta en DROP
 
 
 ##### Comprobación
-###### SSH
+SSH
 ~~~
 debian@lan:~$ ssh 192.168.200.10
     The authenticity of host '192.168.200.10 (192.168.200.10)' can't be established.
@@ -454,7 +454,7 @@ debian@lan:~$ ssh 192.168.200.10
 debian@dmz:~$ exit
 ~~~
 
-###### PING
+PING
 ~~~
 debian@lan:~$ ping 192.168.200.10
     PING 192.168.200.10 (192.168.200.10) 56(84) bytes of data.
@@ -465,7 +465,7 @@ debian@lan:~$ ping 192.168.200.10
 
 ### Tarea 8. Configura la máquina router-fw para que las máquinas LAN y DMZ puedan acceder al exterior.
 
-###### Añadimos las reglas de SNAT para que las máquinas internas puedan acceder al exterior
+Añadimos las reglas de SNAT para que las máquinas internas puedan acceder al exterior
 ~~~
 sudo iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -o eth0 -j MASQUERADE
 sudo iptables -t nat -A POSTROUTING -s 192.168.200.0/24 -o eth0 -j MASQUERADE
@@ -497,26 +497,26 @@ debian@lan:~$ ping 1.1.1.1
 ### Tarea 10. La máquina LAN puede navegar.
 
 ##### Reglas
-###### Activamos DNS
+Activamos DNS
 ~~~
 sudo iptables -A FORWARD -i eth1 -o eth0 -p udp --dport 53 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i eth0 -o eth1 -p udp --sport 53 -m state --state ESTABLISHED -j ACCEPT
 ~~~
 
-###### Activamos HTTP
+Activamos HTTP
 ~~~
 sudo iptables -A FORWARD -i eth1 -o eth0 -p tcp -m multiport --dports 80 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i eth0 -o eth1 -p tcp -m multiport --sports 80 -m state --state ESTABLISHED -j ACCEPT
 ~~~
 
-###### Activamos HTTPS
+Activamos HTTPS
 ~~~
 sudo iptables -A FORWARD -i eth1 -o eth0 -p tcp -m multiport --dports 443 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i eth0 -o eth1 -p tcp -m multiport --sports 443 -m state --state ESTABLISHED -j ACCEPT
 ~~~
 
 ##### Comprobación
-###### Descargamos un paquete
+Descargamos un paquete
 ~~~
 debian@lan:~$ sudo apt install tree
 Reading package lists... Done
@@ -539,19 +539,19 @@ Setting up tree (1.8.0-1) ...
 ### Tarea 11. La máquina DMZ puede navegar. Instala un servidor web, un servidor ftp y un servidor de correos.
 
 ##### Reglas
-###### Activamos DNS
+Activamos DNS
 ~~~
 sudo iptables -A FORWARD -i eth2 -o eth0 -p udp --dport 53 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i eth0 -o eth2 -p udp --sport 53 -m state --state ESTABLISHED -j ACCEPT
 ~~~
 
-###### Activamos HTTP
+Activamos HTTP
 ~~~
 sudo iptables -A FORWARD -i eth2 -o eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i eth0 -o eth2 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
 ~~~
 
-###### Activamos HTTPS
+Activamos HTTPS
 ~~~
 sudo iptables -A FORWARD -i eth2 -o eth0 -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i eth0 -o eth2 -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT
@@ -600,7 +600,7 @@ Do you want to continue? [Y/n] y
 
 ### Tarea 14. El servidor de correos sólo debe ser accesible desde la LAN.
 
-###### En la instalación elegimos *internet site*.
+En la instalación elegimos *internet site*.
 
 ~~~
    ┌───────────────────────────────────┤ Postfix Configuration ├────────────────────────────────────┐
@@ -632,7 +632,7 @@ Do you want to continue? [Y/n] y
    └────────────────────────────────────────────────────────────────────────────────────────────────┘
 ~~~
 
-###### Ahora vamos a especificar las redes permitidas por el servidor de correos en el fichero ```/etc/postfix/main.cf```, modificando las siguiente linea:
+Ahora vamos a especificar las redes permitidas por el servidor de correos en el fichero ```/etc/postfix/main.cf```, modificando las siguiente linea:
 
 ~~~
 mynetworks = 127.0.0.0/8 192.168.100.0/24
@@ -655,21 +655,21 @@ debian@lan:~$ telnet 192.168.200.10 25
 
 ### Tarea 15. En la máquina LAN instala un servidor mysql. A este servidor sólo se puede acceder desde la DMZ.
 
-###### Instalamos en la lan el servidor y en la dmz el cliente de mariadb.
+Instalamos en la lan el servidor y en la dmz el cliente de mariadb.
 
 
-###### En la la LAN
+En la la LAN
 ~~~
 sudo apt install mariadb-server
 ~~~
 
-###### En la DMZ
+En la DMZ
 
 ~~~
 sudo apt install mariadb-client
 ~~~
 
-###### Creamos en el servidor la una base de datos y un usuario, además le asignamos los permisos para que podamos acceder desde la DMZ
+Creamos en el servidor la una base de datos y un usuario, además le asignamos los permisos para que podamos acceder desde la DMZ
 
 ~~~
 MariaDB [(none)]> CREATE DATABASE prueba;
@@ -685,13 +685,13 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
     Query OK, 0 rows affected (0.001 sec)
 ~~~
 
-###### Editamos el fichero ```/etc/mysql/mariadb.conf.d/50-server.cnf``` y añadimos la siguiente linea:
+Editamos el fichero ```/etc/mysql/mariadb.conf.d/50-server.cnf``` y añadimos la siguiente linea:
 
 ~~~
 bind-address            = 0.0.0.0
 ~~~
 
-###### Reiniciamos el sericio:
+Reiniciamos el sericio:
 
 ~~~
 sudo systemctl restart mariadb.service 
@@ -725,7 +725,7 @@ MariaDB [prueba]>
 
 #### MEJORA 1: Implementar que el cortafuego funcione después de un reinicio de la máquina.
 
-###### Con ```root@router-fw:``` creamos el fichero *iptableSave.v4* donde guardaremos todas la reglas de iptables que esten activas en el momento de ejecitar dicho comando.
+Con ```root@router-fw:``` creamos el fichero *iptableSave.v4* donde guardaremos todas la reglas de iptables que esten activas en el momento de ejecitar dicho comando.
 ~~~
 iptables-save > /etc/iproute2/iptableSave.v4
 ~~~
@@ -808,7 +808,7 @@ root@router-fw:~# cat /etc/iproute2/iptableSave.v4
     # Completed on Fri Jan  3 18:03:13 2020
 ~~~
 
-###### Creamos la unidad de systemd, para esto, tenemos que crear el fichero ```/etc/systemd/system/restart-iptables.service``` y añadir las siguientes lineas:
+Creamos la unidad de systemd, para esto, tenemos que crear el fichero ```/etc/systemd/system/restart-iptables.service``` y añadir las siguientes lineas:
 
 ~~~
 [Unit]
@@ -822,7 +822,7 @@ ExecStart=/usr/local/bin/restart-iptables.sh
 WantedBy=multi-user.target
 ~~~
 
-###### Creamos el script en la ruta indicada en el fichero de systemd ```/usr/local/bin/restart-iptables.sh```
+Creamos el script en la ruta indicada en el fichero de systemd ```/usr/local/bin/restart-iptables.sh```
 
 ~~~
 #!/bin/bash
@@ -830,20 +830,20 @@ iptables-restore < /etc/iproute2/iptableSave.v4
 echo "Reglas de iptables restauradas"
 ~~~
 
-###### Cambiamos los permisos del script:
+Cambiamos los permisos del script:
 
 ~~~
 chmod 744 /usr/local/bin/restart-iptables.sh
 ~~~
 
-###### Activamos el servicio para que siempre se active al inicio del sistema:
+Activamos el servicio para que siempre se active al inicio del sistema:
 
 ~~~
 systemctl enable restart-iptables.service
     Created symlink /etc/systemd/system/multi-user.target.wants/restart-iptables.service → /etc/systemd/system/restart-iptables.service.
 ~~~
 
-###### Iniciamos el servicio:
+Iniciamos el servicio:
 
 ~~~
 systemctl start restart-iptables.service
@@ -937,19 +937,19 @@ debian@router-fw:~$ sudo iptables -n -L
 
 #### MEJORA 3: Consruye el cortafuego utilizando nftables.
 
-###### Sustituyendo en cada regla ```iptables``` por ```iptables-translate``` nos saldrá por pantalla la regla traduccida a nftables, pero con algunos errores.
+Sustituyendo en cada regla ```iptables``` por ```iptables-translate``` nos saldrá por pantalla la regla traduccida a nftables, pero con algunos errores.
 
 ~~~
 debian@router-fw:~$ sudo iptables-translate -A FORWARD -i eth1 -o eth0 -p tcp -m multiport --dports 443 -m state --state NEW,ESTABLISHED -j ACCEPT
     nft add rule ip filter FORWARD iifname "eth1" oifname "eth0" ip protocol tcp tcp dport 443 ct state new,established  counter accept
 ~~~
 
-###### Como vemos en la regla de nftables que nos devuelve, encontramos los siguientes fallos:
+Como vemos en la regla de nftables que nos devuelve, encontramos los siguientes fallos:
 
-* ###### ip: En nftables sería inet
-* ###### FORWARD: En nftables tendría que ser forward en minúsculas
+* ip: En nftables sería inet
+* FORWARD: En nftables tendría que ser forward en minúsculas
 
-###### Para solucionar estos fallos creamos el siguiente [SCRIPT](https://github.com/MoralG/Cortafuego_Perimetral_con_DMZ/blob/master/Translate-iptables.sh):
+Para solucionar estos fallos creamos el siguiente [SCRIPT](https://github.com/MoralG/Cortafuego_Perimetral_con_DMZ/blob/master/Translate-iptables.sh):
 
 ``` sh
 #!/bin/sh
@@ -974,12 +974,12 @@ sudo rm /home/debian/fichero2 2> /dev/null
 sudo rm /home/debian/fichero3 2> /dev/null
 ```
 
-###### Ejecutamos el script:
+Ejecutamos el script:
 ~~~
 bash Translate-iptables.sh 
 ~~~
 
-###### Nos crea un fichero con la reglas de nftables corregidas.
+Nos crea un fichero con la reglas de nftables corregidas.
 ~~~
 cat nftables.txt 
     nft add rule inet filter input inet saddr 172.22.0.0/16 tcp dport 22 ct state new,established  counter accept
