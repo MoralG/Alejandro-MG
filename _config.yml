@@ -113,8 +113,6 @@ navigation_header:
   url: /
 - title: Categorias
   url: /categories/
-- title: Blog
-  url: /blog/  
 - title: Sobre mí
   url: /elements/
 - title: Buscador
