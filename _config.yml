@@ -70,7 +70,7 @@ collections:
     feature_text: |
       # Bienvenido a mi Blog
       "No temo a los ordenadores; lo que temo es quedarme sin ellos"
-    feature_image: "/assets/Portada1.jpg"
+    feature_image: "/assets/Portada1.png"
 
 # 6. Jekyll collections settings
 defaults:
@@ -86,7 +86,7 @@ lang: en-GB # Set the site language
 title: "Alejandro MG" # Site name or title, also used in jekyll-seo-tag
 logo: "/assets/logos/Logotipo.png" # Site logo, also used in jekyll-seo-tag
 description: "Administrador de Sistemas Informáticos en Red." # Site description and default description, also used in jekyll-seo-tag
-url: "/assets/Portada1.jpg" # Site url, also used in jekyll-seo-tag
+url: "/assets/Portada1.png" # Site url, also used in jekyll-seo-tag
 baseurl: ""
 repo: "https://github.com/MoralG"
 email: "ale95mogra@gmail.com"
