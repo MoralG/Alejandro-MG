@@ -2,7 +2,7 @@
 title: ""
 feature_text: |
   # Sobre mí
-feature_image: "/assets/Portada.jpg"
+feature_image: "/assets/Portada1.png"
 aside: true
 ---
 
