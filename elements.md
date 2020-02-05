@@ -2,7 +2,7 @@
 title: ""
 feature_text: |
   # Sobre mí
-feature_image: "https://initiate.alphacoders.com/images/180/stretched-1920-1080-180978.png?8870"
+feature_image: "/assets/Portada.jpg"
 aside: true
 ---
 
