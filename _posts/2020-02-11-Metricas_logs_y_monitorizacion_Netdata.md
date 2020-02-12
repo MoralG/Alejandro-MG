@@ -171,7 +171,7 @@ netdata   IN   CNAME   serranito
 ~~~
 
 Comprobamos que funciona la página.
-![netdata](image/Netdata.png)
+![netdata](https://github.com/MoralG/Metricas_logs_y_monitorizacion_Netdata/blob/master/image/Netdata.png?raw=true)
 
 ## Configuración de los Clientes (Croqueta, Tortilla, Salmorejo)
 
@@ -340,7 +340,7 @@ systemctl restart netdata.service
 ~~~
 
 Comprobamos en la aplicación que nos aparece los clientes de Croqueta, Tortilla y Salmorejo.
-![Netdata](image/Netdata1.png)
+![Netdata](https://github.com/MoralG/Metricas_logs_y_monitorizacion_Netdata/blob/master/image/Netdata1.png?raw=true)
 
 Ya tenemos todos los datos de los clientes, agrupados en el servidor y nos lo muestra en nuestra servicio web, pero nos muestra una gran cantidad de métricas que son innecesarias para la funcionalidad que nosotros queremos.
 
@@ -397,7 +397,7 @@ template: 10min_cpu_usage
 > **NOTA**: `sysadmin` puede mandar la alerta a discord o slack, esto lo explicaremos más abajo
 
 Guardamos la configuración y ya nos saldrá configurado en nuestra web.
-![Netdata](image/Netdata4.png)
+![Netdata](https://github.com/MoralG/Metricas_logs_y_monitorizacion_Netdata/blob/master/image/Netdata4.png?raw=true)
 
 Para probar lo de las notificaciones vamos a estresar nuestra máquina. Vamos a instalar el paquete de `stress` y esperaremos a que la utilización de la CPU aumente hasta el 60%.
 
@@ -412,17 +412,17 @@ stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 200s
 ~~~
 
 Como podemos ver, la CPU esta al 100%:
-![Netdata](image/Netdata5.png)
+![Netdata](https://github.com/MoralG/Metricas_logs_y_monitorizacion_Netdata/blob/master/image/Netdata5.png?raw=true)
 
 Y tenemos las notificaciones que nos avisan:
-![Netdata](image/Netdata6.png)
+![Netdata](https://github.com/MoralG/Metricas_logs_y_monitorizacion_Netdata/blob/master/image/Netdata6.png?raw=true)
 
 Esto esta muy bien, pero en el caso de no estar atento a la web, tenemos que buscar un metodo para que nos notifiquen, por eso vamos a configurar netdata para que nos envien las alertas a discord y slack.
 
 ### Discord
 
 Para configurar las notificaciones en discord tenemos que crear un servidor en discord y avtivar la opción de **Webhook**
-![Netdata](image/Netdata2.png)
+![Netdata](https://github.com/MoralG/Metricas_logs_y_monitorizacion_Netdata/blob/master/image/Netdata2.png?raw=true)
 
 Nos dará un enlace, el cual añadiremos a la configuración de netdata en el fichero `health_alarm_notify.conf` con el script `edit-config`.
 
@@ -450,13 +450,13 @@ Como podemos ver, en `DISCORD_WEBHOOK_URL` añadiremos la url proporcionada al a
 
 
 Le realizamos el mismo comando de antes para estresarlo y nos avisará.
-![Netdata](image/Netdata8.png)
+![Netdata](https://github.com/MoralG/Metricas_logs_y_monitorizacion_Netdata/blob/master/image/Netdata8.png?raw=true)
 
 ### Slack
 
 Vamos a configurar como en el caso de discord, el fichero `health_alarm_notify.conf` con el script `edit-config`. Y añadimos a `SLACK_WEBHOOK_URL` el enlace que nos da **Webhook** al crearlo en nuestro servidor.
 
-![Netdata](image/Netdata7.png)
+![Netdata](https://github.com/MoralG/Metricas_logs_y_monitorizacion_Netdata/blob/master/image/Netdata7.png?raw=true)
 
 Además le indicamos en `DEFAULT_RECIPIENT_SLACK` que sea `#` para que reconozca el canal que le hemos indicado en el **Webhook**.
 ~~~
@@ -516,4 +516,4 @@ Probamos que funciona con un test que se ejecuta con el siguiente script:
 
 Como podemos ver, nos llega las alertas del test.
 
-![Netdata](image/Netdata9.png)
+![Netdata](https://github.com/MoralG/Metricas_logs_y_monitorizacion_Netdata/blob/master/image/Netdata9.png?raw=true)
