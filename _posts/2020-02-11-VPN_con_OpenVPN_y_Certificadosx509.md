@@ -28,13 +28,6 @@ aside: true
 * Tras el establecimiento de la VPN, la máquina cliente debe ser capaz de acceder a una máquina que esté en la otra red a la que está conectado el servidor.
 ---------------------------------------------------------------------------------
 
-#### Configuración
-|NOMBRE             |DIRECCIÓN      |MIRED1        |DESCRIPCIÓN
-|:-----------------:|:-------------:|:------------:|:---
-|Cliente1           |172.22.0.163   |192.168.200.1 |Máquina cliente
-|Servidor2          |172.22.0.56    |192.169.100.1 |Máquina servidor sobre el **Cliente2**
-|Cliente2           |-              |192.169.100.2 |Máquina cliente en la misma red interna que el **Servidor2**
-
 #### Configuración Vagrant Cliente
 ~~~
 Vagrant.configure("2") do |config|
@@ -252,13 +245,6 @@ ping 192.168.100.2
 * Se utilizarán direcciones de la red 10.99.99.0/24 para las direcciones virtuales de la VPN.
 * Tras el establecimiento de la VPN, una máquina de cada red detrás de cada servidor VPN debe ser capaz de acceder a una máquina del otro extremo.
 
-#### Configuración
-|NOMBRE             |DIRECCIÓN      |MIRED1        |DESCRIPCIÓN
-|:-----------------:|:-------------:|:------------:|:---------------
-|Servidor/Cliente1  |172.22.0.163   |192.168.200.1 |Máquina cliente que actua como servidor sobre el **Cliente1**
-|Cliente1           |-              |192.169.200.2 |Máquina cliente en la misma red interna que el **Servidor/Cliente1**
-|Servidor2          |172.22.0.56    |192.169.100.20|Máquina servidor sobre el **Cliente2**
-|Cliente2           |-              |192.169.100.50|Máquina cliente en la misma red interna que el **Servidor2**
 
 #### Configuración Vagrant Servidor/Cliente
 ~~~
