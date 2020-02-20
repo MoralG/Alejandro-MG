@@ -1,7 +1,10 @@
 # [Alembic](https://alembic.darn.es/)
 [![Gem Version](https://badge.fury.io/rb/alembic-jekyll-theme.svg)](https://badge.fury.io/rb/alembic-jekyll-theme)
 
-[![asciicast](https://asciinema.org/a/YheW9j0Hdi1O1M78k9flm0Sqp.svg)](https://asciinema.org/a/YheW9j0Hdi1O1M78k9flm0Sqp)
+
+
+
+
 
 ⚗ A Jekyll boilerplate theme designed to be a starting point for any Jekyll website.
 
