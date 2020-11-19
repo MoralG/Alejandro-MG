@@ -1,0 +1,52 @@
+{
+  "lang": "en-GB",
+  "name": "Alejandro MG",
+  "short_name": "AlejandroMG",
+  "theme_color": "#24292e",
+  "background_color": "#ffffff",
+  
+    "icons": [
+      
+        {
+          "src": "/assets/logos/Avatar.png",
+          "sizes": "16x16"
+        },
+      
+        {
+          "src": "/assets/logos/Avatar.png",
+          "sizes": "32x32"
+        },
+      
+        {
+          "src": "/assets/logos/Avatar.png",
+          "sizes": "96x96"
+        },
+      
+        {
+          "src": "/assets/logos/Avatar.png",
+          "sizes": "120x120"
+        },
+      
+        {
+          "src": "/assets/logos/Avatar.png",
+          "sizes": "144x144"
+        },
+      
+        {
+          "src": "/assets/logos/Avatar.png",
+          "sizes": "180x180"
+        },
+      
+        {
+          "src": "/assets/logos/Avatar.png",
+          "sizes": "512x512"
+        },
+      
+        {
+          "src": "/assets/logos/Avatar.png",
+          "sizes": "1024x1024"
+        }
+      
+    ],"start_url": "/",
+  "display": "standalone"
+}
